@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      sortable
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">  </script>
+  </head>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dark-hive/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+      .bluebox{
+        background-color: #3A5795;
+		color: white;
+		height: 100px;
+		width:auto;
+    margin: 5px 5px;
+
+	  }
+	  .yellowbox{
+		background-color: rgb(222, 224, 85);
+		height: auto;
+		width: auto;
+		padding: 10px;
+    margin: 5px 5px;
+	  }
+	  .greenbox{
+		background-color: #31af37;
+		height: auto;
+		width: auto;
+		padding: 10px;
+    margin: 5px 5px;
+
+	  }
+	  #great{
+		background-color: #5a3479;
+		
+	  }
+	  
+	  li{
+		font-size: 2em;
+		margin-bottom: 5px;
+		text-align: center;
+	  }
+	  .connectedList{
+		border: 1px solid #eee;
+		min-height: 20px;
+	  }
+	  
+	</style>
+  </head>
+  
+  <body>
+    <div class="bluebox ui-corner-all" id="facebook">
+      <p>
+        Facebook is 
+        <span class="great" id="great">
+          great
+        </span>
+        .
+      </p>
+      
+    </div>
+    <div class="yellowbox ui-corner-all" id="apple">
+      <ul id="list1" class="connectedList">
+        <li class="ui-state-default">Audi</li>
+        <li class="ui-state-default"> BMW</li>
+        <li class="ui-state-default">Mercedes</li>
+        <li id="hidden1" style="visibility:hidden;"></li>
+      </ul>
+    </div>
+    <div class="greenbox ui-corner-all" id="microsoft">
+      <p>
+        Microsoft.
+      </p>
+      <ul id="list2" class="connectedList">
+        <li class="ui-state-default">Ford</li>
+        <li class="ui-state-default">Toyota</li>
+        <li class="ui-state-default">Ferrari</li>
+        <li id="hidden2" style="visibility:hidden;"></li>
+      </ul>
+      
+    </div>
+    <script>
+      $(()=>{
+        // $("#list1").sortable({
+        //   placeholder:"ui-state-highlight",
+        //   connectWith: "#list2"
+        // });
+        // $("#list2").sortable({
+        //   placeholder:"ui-state-highlight",
+        //   connectWith: "#list1"
+
+        // });
+        $("#list1 ,#list2").sortable({
+          items: "li:not(#hidden1,#hidden2)",
+          connectWith: "#list1 ,#list2",
+          start:()=>{
+            $("#hidden1").css("display","inline-block");
+            $("#hidden2").css("display","inline-block");
+          },
+          stop:()=>{
+            $("#hidden1").remove();
+            $("#hidden2").remove();
+            $("#list1").append(('<li id="hidden1" style="visibility:hidden; display:none"></li>'));
+            $("#list2").append(('<li id="hidden2" style="visibility:hidden; display:none"></li>'));
+          },
+
+        });
+      })
+    </script>
+  </body>
+  
+</html>
